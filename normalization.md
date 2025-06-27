@@ -1,4 +1,9 @@
-# Normalization of Data 
+# Normalization of Data: 
+
+# What is Data Normalization: 
+
+# Normalization Diagram: 
+![ERD drawing](Normalization.drawio.png) 
 
 ## Relationships: 
 - One **User** can own many **Properties.** 
