@@ -1,8 +1,8 @@
 # Normalization of Data: 
 
-# What is Data Normalization: 
+## What is Data Normalization: 
 
-# Normalization Diagram: 
+## Normalization Diagram: 
 ![ERD drawing](Normalization.drawio.png) 
 
 ## Relationships: 
