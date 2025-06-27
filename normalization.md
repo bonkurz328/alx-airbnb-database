@@ -1,11 +1,11 @@
 # Normalization of Data: 
 
-## What is Data Normalization: 
+## 1. What is Data Normalization: 
 
-## Normalization Diagram: 
+## 2. Normalization Diagram: 
 ![ERD drawing](Normalization.drawio.png) 
 
-## Relationships: 
+## 3. Relationships: 
 - One **User** can own many **Properties.** 
 - One **User** can make many **Bookings.** 
 - One **Property** can have many **Users.** 
