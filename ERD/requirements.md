@@ -10,8 +10,10 @@
   - **password_hash:** VARCHAR, NOT NULL  
   - **phone_number:** VARCHAR, NULL 
   - **role:** ENUM (guest, host, admin), NOT NULL 
-  - **created_at:** TIMESTAMP, DEFAULT CURRENT_TIMESTAMP 
+  - **created_at:** TIMESTAMP, DEFAULT CURRENT_TIMESTAMP  
     
+---
+
 ### **2. Property** 
 - A house or apartment listed for rent 
   - **property_id:** Primary Key, UUID, Indexed 
@@ -22,6 +24,8 @@
   - **pricepernight:** DECIMAL, NOT NULL 
   - **created_at:** TIMESTAMP, DEFAULT CURRENT_TIMESTAMP 
   - **updated_at:** TIMESTAMP, ON UPDATE CURRENT_TIMESTAMP 
+
+---
     
 ### **3. Booking** 
 - A reservation made by a user to occupy a property 
@@ -33,7 +37,9 @@
   - **total_price:** DECIMAL, NOT NULL 
   - **status:** ENUM (pending, confirmed, canceled), NOT NULL 
   - **created_at:** TIMESTAMP, DEFAULT CURRENT_TIMESTAMP 
-    
+
+---
+
 ### **4. Payment** 
 - Payment for a booking 
   - **payment_id:** Primary Key, UUID, Indexed 
@@ -41,7 +47,9 @@
   - **amount:** DECIMAL, NOT NULL 
   - **payment_date:** TIMESTAMP, DEFAULT CURRENT_TIMESTAMP 
   - **payment_method:** ENUM (credit_card, paypal, stripe), NOT NULL 
-    
+
+---
+
 ### **5. Review** 
 - Feedback given by the user 
   - **review_id:** Primary Key, UUID, Indexed 
@@ -50,7 +58,9 @@
   - **rating:** INTEGER, CHECK: rating >= 1 AND rating <= 5, NOT NULL 
   - **comment:** TEXT, NOT NULL 
   - **created_at:** TIMESTAMP, DEFAULT CURRENT_TIMESTAMP 
-    
+
+---
+
 ### **6. Message** 
 - Customer feedback by the user 
   - **message_id:** Primary Key, UUID, Indexed 
@@ -58,7 +68,9 @@
   - **recipient_id:** Foreign Key, references User(user_id) 
   - **messsage_body:** TEXT, NOT NULL 
   - **sent_at:** TIMESTAMP, DEFAULT CURRENT_TIMESTAMP 
-    
+
+---
+
 ## Relationships: 
 - One **User** can own many **Properties.** 
 - One **User** can make many **Bookings.** 
@@ -69,6 +81,8 @@
 - One **Booking** has one **Payment.** 
 - One **Booking** has one **Review.** 
 - One **Review** has one **Message.** 
+
+---
 
 ## ER Diagram: 
 ![ERD drawing](ERD.drawio.png) 
