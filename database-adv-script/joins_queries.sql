@@ -6,9 +6,21 @@ ON Bookings.user_id = Users.user_id;
 
 -- LEFT JOIN to retrieve all properties and their reviews, including properties that have no reviews 
 
-SELECT * FROM Property 
-LEFT JOIN Reviews 
-ON Property.property_id = Reviews.property_id; 
+SELECT 
+    Property.property_id,
+    Property.name,
+    Property.location,
+    Property.pricepernight,
+    Review.review_id,
+    Review.rating,
+    Review.comment,
+    Review.created_at AS review_date
+FROM 
+    Property
+LEFT JOIN 
+    Review ON Property.property_id = Review.property_id
+ORDER BY 
+    Property.property_id;
 
 -- FULL OUTER JOIN to retrieve all users and all bookings, even if the user has no booking or a booking is not linked to a user 
 
