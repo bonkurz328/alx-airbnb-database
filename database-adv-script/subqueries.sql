@@ -7,5 +7,13 @@ WHERE property_id IN (
     HAVING AVG(rating) > 4.0  -- HAVING (not WHERE) for aggregates!
 ); 
 
-SELECT * FROM Booking 
-WHERE user_id > 3.0; 
+SELECT * FROM User 
+WHERE user_id IN (
+    SELECT user_id 
+    FROM Booking 
+    GROUP BY user_id 
+    HAVING COUNT(*) > 3  -- Changed to COUNT(*)
+);
+
+---
+
