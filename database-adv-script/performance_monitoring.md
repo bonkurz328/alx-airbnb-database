@@ -10,18 +10,18 @@ ORDER BY b.created_at DESC
 LIMIT 100;  
 
 ## 2. Using SHOW PROFILE (MySQL/MariaDB)
-<!-- Enable profiling -->
-SET profiling = 1;
-<!-- Run your query -->
-SELECT * FROM Booking WHERE status = 'confirmed' AND start_date > '2024-01-01';
-<!-- Show profile -->
-SHOW PROFILE;
+<!-- Enable profiling -->  
+SET profiling = 1;  
+<!-- Run your query -->  
+SELECT * FROM Booking WHERE status = 'confirmed' AND start_date > '2024-01-01';  
+<!-- Show profile -->  
+SHOW PROFILE;  
 
 # 2. Identifying Bottlenecks
 ## Common Issues Found:
 ### 1. Full Table Scans (Seq Scan)
-* Queries scanning entire tables instead of using indexes
-* Example: Seq Scan on Booking (cost=0.00..1250.50 rows=5000)
+* Queries scanning entire tables instead of using indexes  
+* Example: Seq Scan on Booking (cost=0.00..1250.50 rows=5000)  
 
 ### 2. Missing Join Indexes
 * Slow JOIN operations due to unindexed foreign keys
@@ -34,37 +34,37 @@ SHOW PROFILE;
 
 # 3. Implementing Optimizations
 ## Optimization 1: Add Missing Indexes
--- Indexes for Booking table
-CREATE INDEX idx_booking_start_date ON Booking(start_date);
-CREATE INDEX idx_booking_status ON Booking(status);
-CREATE INDEX idx_booking_user ON Booking(user_id);
-CREATE INDEX idx_booking_property ON Booking(property_id);
+<!-- Indexes for Booking table -->
+CREATE INDEX idx_booking_start_date ON Booking(start_date);  
+CREATE INDEX idx_booking_status ON Booking(status);  
+CREATE INDEX idx_booking_user ON Booking(user_id);  
+CREATE INDEX idx_booking_property ON Booking(property_id);  
 
--- Indexes for Property table
+<!-- Indexes for Property table -->
 CREATE INDEX idx_property_name ON Property(name);
 
--- Composite index for sorting
+<!-- Composite index for sorting -->
 CREATE INDEX idx_booking_created_at ON Booking(created_at DESC);
 
 ## Optimization 2: Refactor Queries
--- Before (slow)
+<!-- Before (slow) -->
 SELECT * FROM Booking WHERE status = 'confirmed';
 
--- After (optimized)
-SELECT booking_id, start_date, end_date 
-FROM Booking 
-WHERE status = 'confirmed' 
-AND start_date > '2024-01-01'
-LIMIT 1000;
+<!-- After (optimized) -->
+SELECT booking_id, start_date, end_date  
+FROM Booking  
+WHERE status = 'confirmed'  
+AND start_date > '2024-01-01'  
+LIMIT 1000;  
 
 ## Optimization 3: Partition Large Tables
--- Partition Booking by year
+<!-- Partition Booking by year -->
 CREATE TABLE Booking_Partitioned (
-    -- columns
+<!-- columns -->
 ) PARTITION BY RANGE (EXTRACT(YEAR FROM start_date));
 
--- Create yearly partitions
-CREATE TABLE booking_2024 PARTITION OF Booking_Partitioned
-    FOR VALUES FROM (2024) TO (2025);
+<!-- Create yearly partitions -->
+CREATE TABLE booking_2024 PARTITION OF Booking_Partitioned  
+    FOR VALUES FROM (2024) TO (2025);  
 
 # 4. Performance Improvements
