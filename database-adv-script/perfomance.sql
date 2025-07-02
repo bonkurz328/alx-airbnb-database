@@ -1,3 +1,4 @@
+<!-- Initial Query -->
 SELECT 
     b.booking_id,
     b.start_date,
