@@ -17,3 +17,12 @@ WHERE user_id IN (
 
 ---
 
+-- Modified for Best Practice 
+
+SELECT u.* 
+FROM User u
+WHERE (
+    SELECT COUNT(*) 
+    FROM Booking b 
+    WHERE b.user_id = u.user_id  -- Correlated subquery version
+) > 3;
